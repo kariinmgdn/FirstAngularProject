@@ -1,0 +1,35 @@
+<section class="planner-section">
+  <h1 class="planner-title"><span>Planner page</span></h1>
+  <div class="planner-container">
+    <div class="planner">
+      <div class="planner-actions">
+        <input
+          [(ngModel)]="inputValue"
+          (keydown.enter)="addTask()"
+          class="task-input"
+          type="text"
+          placeholder="Add new task..." />
+        <button (click)="addTask()" class="task-add-btn">Add</button>
+      </div>
+      <div class="planner-tasks">
+        <div
+          class="planner-task"
+          *ngFor="let task of plannerTasks; let i = index">
+          <div class="checkbox-container">
+            <input class="checkbox" id={{i}} [(ngModel)]="task.done" type="checkbox" />
+            <label for={{i}}></label>
+          </div>
+          <p class="test-position" [ngClass]="task.done ? 'strikethrough' : 'null'">
+            {{ task.text }}
+          </p>
+          <button class="delete-btn" (click)="deleteTask(i)">
+            <img src="https://cdn-icons-png.flaticon.com/512/1017/1017479.png" style="max-width: 17px;min-width: 17px;max-height: 17px;min-height: 17px"/>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="plannerTasks.length>0" class="completed-tasks">You have completed {{ addCompletedTasks }} /
+        {{ plannerTasks.length }} tasks
+      </div>
+    </div>
+  </div>
+</section>
